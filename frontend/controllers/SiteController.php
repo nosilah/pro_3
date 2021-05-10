@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use frontend\models\ResendVerificationEmailForm;
@@ -14,6 +15,8 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\Users;
+
 
 /**
  * Site controller
@@ -74,7 +77,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+       $users = new Users();
+
+       $listUsers =  $users->find()->asArray()->all();
+
+        return $this->render('index', [
+            'listUsers' => $listUsers,
+        ]);
     }
 
     /**
@@ -142,6 +152,8 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+
+
         return $this->render('about');
     }
 
